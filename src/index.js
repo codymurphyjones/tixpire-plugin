@@ -13,8 +13,8 @@ export const firestore;
 export const auth;
 	*/
 	
-import "./config"
+import { elementname } from "./component"
 
-let val = document.getElementById("test");
+let val = document.getElementById(elementname);
 
 console.log(val);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup ./src/index.js --file dist/bundle.js --format iife",
-    "start": "start test.html"
+    "test": "start test.html"
   },
   "repository": {
     "type": "git",
