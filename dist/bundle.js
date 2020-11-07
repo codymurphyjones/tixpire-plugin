@@ -5,7 +5,7 @@ var Tixpire = (function () {
   const tixpireUrl = "https://services.tixpire.com/checkout";
 
   const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css";
-  var currentUrl = window.location.href;
+  var currentUrl = window.location.href.split("://")[1];
 
   function post(params, method='post') {
     const form = document.createElement('form');
@@ -27,7 +27,7 @@ var Tixpire = (function () {
     
   }
 
-  function Tixpire (selector, getCart,requiredURL = null, maxWidth = null) {
+  function Tixpire (selector, getCart,requiredURL = null, styleObj = null) {
     // Setup a click listener on <app-drawer> itself.
       //this.addEventListener('click', );
   	const onClick = () => {
@@ -50,8 +50,7 @@ var Tixpire = (function () {
   		head.appendChild(link); 
   		let childButton = document.querySelector('#tixpire');
   		childButton.onclick = onClick;
-  		childButton.style.maxWidth = maxWidth;
-  		console.log(childButton);
+  		Object.assign(childButton.style,styleObj);
   	};
 
   	if(requiredURL != null && requiredURL != currentUrl)
