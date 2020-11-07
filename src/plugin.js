@@ -36,8 +36,10 @@ export default function (selector, getCart,requiredURL = null, maxWidth = null) 
 	
 	const init = () => {
 		//setAttribute('class', 'tixpire_button')
+		console.log("I happen");
 		let parent = document.querySelector(selector)
-		parent.innerHTML = "<button id='tixpire' aria-label='Go Now, Pay Later, Tixpire'><div><span>Go Now, Pay Later</span><em></em></div></button>"
+		let html = parent.innerHTML;
+		parent.innerHTML = html + "<button id='tixpire' aria-label='Go Now, Pay Later, Tixpire'><div><span>Go Now, Pay Later</span><em></em></div></button>"
 		console.log(parent);
 		var head = document.getElementsByTagName('HEAD')[0];  
 		var link = document.createElement('link'); 
@@ -50,7 +52,7 @@ export default function (selector, getCart,requiredURL = null, maxWidth = null) 
 		childButton.style.maxWidth = maxWidth;
 		console.log(childButton);
 	}
-	
+
 	if(requiredURL != null && requiredURL != currentUrl)
 			return;
 	
