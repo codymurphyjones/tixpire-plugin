@@ -1,6 +1,6 @@
 import {version, tixpireUrl, testUrl} from './config.js';
 const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css"
-var currentUrl = window.location.href.split("://")[1];
+var currentUrl = window.location.href.split("://")[1].replace("www.","");
 
 function post(params, method='post') {
   const form = document.createElement('form');
