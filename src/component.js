@@ -1,9 +1,20 @@
-import {version} from '../package.json'
-console.log(version);
+import {version, tixpireUrl} from '../package.json'
+
 const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css"
-console.log(style);
 
 //https://payments.pabbly.com/subscribe/5e9cc88423bccc02d4c6ba46/Udemy%20AWS%20Certified%20Solutions%20Architect%20-%20Associate%202020%20Standard%20Plan
+
+
+/*
+    var CloseChild = () => {
+        try {
+        window.opener.postMessage("CLOSEPOPUP", "*");
+        }
+        catch {
+            alert("No parent");
+        }
+    }
+*/
 
 class Tixpire extends HTMLElement {
 
@@ -21,17 +32,30 @@ class Tixpire extends HTMLElement {
     }
   }
   
+   get url() {
+    return this.getAttribute('url');
+  }
+
+  set url(val) {
+    // Reflect the value of the disabled property as an HTML attribute.
+    if (val) {
+      this.setAttribute('url', val);
+    } else {
+      this.removeAttribute('url');
+    }
+  }
+  
    get product() {
     return this.getAttribute('product');
   }
+  
+  // A getter/setter for a disabled property.
+  get onSuccess() {
+    return this.getAttribute('onSuccess');
+  }
 
-  set product(val) {
-    // Reflect the value of the disabled property as an HTML attribute.
-    if (val) {
-      this.setAttribute('product', '');
-    } else {
-      this.removeAttribute('product');
-    }
+  get onCancel() {
+    return this.getAttribute('onCancel');
   }
 
   // Can define constructor arguments if you wish.
@@ -43,13 +67,33 @@ class Tixpire extends HTMLElement {
     this.addEventListener('click', e => {
 		if(this.disabled)
 			return;
-		window.open('https://tixpire-admin-panel.herokuapp.com/landing/' + this.product, '_blank',"height=500,width=500"); 
+		window.open(tixpireUrl + this.product, '_blank',"height=500,width=500"); 
     });
 	
+	window.addEventListener("message", (event) => {
+		switch(event.data) {
+			case "SUCCESS":
+				if(this.onSuccess != nil) {
+					this.onSuccess();
+				}
+				else {
+					console.log("Success!");
+				}
+			break;
+			
+			case "CANCEL":
+				if(this.onCancel != nil) {
+					this.onCancel();
+				}
+				else {
+					console.log("Cancel!");
+				}
+			break;
+		}
+	}, false);
+	
 	function checkSize() {
-		console.log(this);
 		let val = this.parentElement.offsetWidth;
-		
 		
 		if(val < 160)
 			this.childNodes[0].childNodes[0].classList = "small"
@@ -71,11 +115,10 @@ class Tixpire extends HTMLElement {
 	var link = document.createElement('link'); 
 	link.rel = 'stylesheet';  
 	link.type = 'text/css'; 
-	link.href = style;
-	//link.href = './src/style.css'
+	link.href = '../src/style.css'
 
 	head.appendChild(link); 
   }
 }
 
-window.customElements.define('tixpire-api', Tixpire);
+window.customElements.define('tixpire-pay', Tixpire);

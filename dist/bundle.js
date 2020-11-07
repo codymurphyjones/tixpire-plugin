@@ -1,87 +1,69 @@
-(function () {
+var Tixpire = (function () {
   'use strict';
 
-  var version = "0.0.1";
+  const version = "0.0.2";
+  const tixpireUrl = "https://services.tixpire.com/checkout";
 
-  console.log(version);
   const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css";
-  console.log(style);
 
-  //https://payments.pabbly.com/subscribe/5e9cc88423bccc02d4c6ba46/Udemy%20AWS%20Certified%20Solutions%20Architect%20-%20Associate%202020%20Standard%20Plan
-
-  class Tixpire extends HTMLElement {
-
-    // A getter/setter for a disabled property.
-    get disabled() {
-      return this.hasAttribute('disabled');
-    }
-
-    set disabled(val) {
-      // Reflect the value of the disabled property as an HTML attribute.
-      if (val) {
-        this.setAttribute('disabled', '');
-      } else {
-        this.removeAttribute('disabled');
+  function post(params, method='post') {
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = tixpireUrl;
+    form.target = "tixpire_popup";
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = key;
+        hiddenField.value = params[key];
+        form.appendChild(hiddenField);
       }
     }
+    form.onsubmit=`window.open('about:blank', "tixpire_popup","height=500,width=500");`;
+    document.body.appendChild(form);
+    form.submit();
     
-     get product() {
-      return this.getAttribute('product');
-    }
-
-    set product(val) {
-      // Reflect the value of the disabled property as an HTML attribute.
-      if (val) {
-        this.setAttribute('product', '');
-      } else {
-        this.removeAttribute('product');
-      }
-    }
-
-    // Can define constructor arguments if you wish.
-    constructor() {
-      // If you define a constructor, always call super() first!
-      // This is specific to CE and required by the spec.
-      super();
-      // Setup a click listener on <app-drawer> itself.
-      this.addEventListener('click', e => {
-  		if(this.disabled)
-  			return;
-  		window.open('https://tixpire-admin-panel.herokuapp.com/landing/' + this.product, '_blank',"height=500,width=500"); 
-      });
-  	
-  	function checkSize() {
-  		console.log(this);
-  		let val = this.parentElement.offsetWidth;
-  		
-  		
-  		if(val < 160)
-  			this.childNodes[0].childNodes[0].classList = "small";
-  		else
-  			this.childNodes[0].childNodes[0].removeAttribute("class");
-  	}
-  	
-  	window.addEventListener('resize', checkSize.bind(this));
-  	
-  	this.addEventListener('resize', checkSize.bind(this));
-  	
-  	window.onload = () => {
-  		checkSize.bind(this)();
-  	};
-  	
-  	this.setAttribute('class', 'tixpire_button');
-  	this.innerHTML = "<button aria-label='Go Now, Pay Later, Tixpire'><div><span>Go Now, Pay Later</span><em></em></div></button>";
-  	var head = document.getElementsByTagName('HEAD')[0];  
-  	var link = document.createElement('link'); 
-  	link.rel = 'stylesheet';  
-  	link.type = 'text/css'; 
-  	link.href = style;
-  	//link.href = './style.css'
-
-  	head.appendChild(link); 
-    }
   }
 
-  window.customElements.define('tixpire-api', Tixpire);
+  function cartData() {
+  	return JSON.stringify([{name: "Item 1", price: 500.00, quantity: 1, id: "1000"}, {name: "Item 2", price: 500.00, quantity: 2, id: "1001"}, {name: "Item 3", price: 500.00, quantity: 1, id: "1002"}]);
+  }
+
+  function Tixpire (selector, getCart = cartData) {
+    // Setup a click listener on <app-drawer> itself.
+      //this.addEventListener('click', );
+  	const onClick = () => {
+  		//window.open(tixpireUrl, '_blank',"height=500,width=500"); 
+  		post({cart: getCart()});
+      };
+  	
+  	const init = () => {
+  		//setAttribute('class', 'tixpire_button')
+  		let parent = document.querySelector(selector);
+  		parent.innerHTML = "<button id='tixpire' aria-label='Go Now, Pay Later, Tixpire'><div><span>Go Now, Pay Later</span><em></em></div></button>";
+  		console.log(parent);
+  		var head = document.getElementsByTagName('HEAD')[0];  
+  		var link = document.createElement('link'); 
+  		link.rel = 'stylesheet';  
+  		link.type = 'text/css'; 
+  		link.href = style;//'../src/style.css'
+  		head.appendChild(link); 
+  		let childButton = document.querySelector('#tixpire');
+  		childButton.onclick = onClick;
+  		console.log(childButton);
+  	};
+  	
+  	
+  	if(document.readyState === "complete" || document.readyState === "interactive")
+  	{
+  		init();
+  	}
+  	else {
+  		window.onload = init;
+  	}
+  }
+
+  return Tixpire;
 
 }());
