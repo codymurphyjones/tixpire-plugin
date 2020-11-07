@@ -39,7 +39,7 @@ export default function (selector, getCart,requiredURL = null, styleObj = null) 
 		console.log("I happen");
 		let parent = document.querySelector(selector)
 		let html = parent.innerHTML;
-		parent.innerHTML = html + "<button id='tixpire' aria-label='Go Now, Pay Later, Tixpire'><div><span>Go Now, Pay Later</span><em></em></div></button>"
+		parent.innerHTML += "<button id='tixpire' aria-label='Go Now, Pay Later, Tixpire'><div><span>Go Now, Pay Later</span><em></em></div></button>"
 		console.log(parent);
 		var head = document.getElementsByTagName('HEAD')[0];  
 		var link = document.createElement('link'); 
