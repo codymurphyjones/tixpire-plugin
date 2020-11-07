@@ -5,6 +5,7 @@ var Tixpire = (function () {
   const tixpireUrl = "https://services.tixpire.com/checkout";
 
   const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css";
+  var currentUrl = window.location.href;
 
   function post(params, method='post') {
     const form = document.createElement('form');
@@ -26,11 +27,7 @@ var Tixpire = (function () {
     
   }
 
-  function cartData() {
-  	return JSON.stringify([{name: "Item 1", price: 500.00, quantity: 1, id: "1000"}, {name: "Item 2", price: 500.00, quantity: 2, id: "1001"}, {name: "Item 3", price: 500.00, quantity: 1, id: "1002"}]);
-  }
-
-  function Tixpire (selector, getCart = cartData) {
+  function Tixpire (selector, getCart,requiredURL = null, maxWidth = null) {
     // Setup a click listener on <app-drawer> itself.
       //this.addEventListener('click', );
   	const onClick = () => {
@@ -51,9 +48,12 @@ var Tixpire = (function () {
   		head.appendChild(link); 
   		let childButton = document.querySelector('#tixpire');
   		childButton.onclick = onClick;
+  		childButton.style.maxWidth = maxWidth;
   		console.log(childButton);
   	};
   	
+  	if(requiredURL != null && requiredURL != currentUrl)
+  			return;
   	
   	if(document.readyState === "complete" || document.readyState === "interactive")
   	{
