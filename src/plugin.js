@@ -1,5 +1,6 @@
 import {version, tixpireUrl, testUrl} from './config.js';
 const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css"
+var currentUrl = window.location.href;
 
 function post(params, method='post') {
   const form = document.createElement('form');
@@ -25,7 +26,7 @@ function cartData() {
 	return JSON.stringify([{name: "Item 1", price: 500.00, quantity: 1, id: "1000"}, {name: "Item 2", price: 500.00, quantity: 2, id: "1001"}, {name: "Item 3", price: 500.00, quantity: 1, id: "1002"}]);
 }
 
-export default function (selector, getCart = cartData, maxWidth = null) {
+export default function (selector, getCart,requiredURL = null, maxWidth = null) {
   // Setup a click listener on <app-drawer> itself.
     //this.addEventListener('click', );
 	const onClick = () => {
@@ -50,6 +51,8 @@ export default function (selector, getCart = cartData, maxWidth = null) {
 		console.log(childButton);
 	}
 	
+	if(requiredURL != null && requiredURL != currentUrl)
+			return;
 	
 	if(document.readyState === "complete" || document.readyState === "interactive")
 	{
