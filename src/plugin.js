@@ -26,12 +26,12 @@ function cartData() {
 	return JSON.stringify([{name: "Item 1", price: 500.00, quantity: 1, id: "1000"}, {name: "Item 2", price: 500.00, quantity: 2, id: "1001"}, {name: "Item 3", price: 500.00, quantity: 1, id: "1002"}]);
 }
 
-export default function (selector, getCart,requiredURL = null, styleObj = null) {
+export default function (vendorName,selector, getCart,requiredURL = null, styleObj = null) {
   // Setup a click listener on <app-drawer> itself.
     //this.addEventListener('click', );
 	const onClick = () => {
 		//window.open(tixpireUrl, '_blank',"height=500,width=500"); 
-		post({cart: getCart()});
+		post({cart: getCart(), vendor: vendorName});
     }
 	
 	const init = () => {
