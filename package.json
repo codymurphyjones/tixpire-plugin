@@ -1,11 +1,14 @@
 {
   "name": "tixpire-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
+  "tixpireUrl": "https://services.tixpire.com/checkout",
+  "testUrl": "http://localhost:3000/checkout",
   "scripts": {
 	"build": "rollup -c",
-    "test": "start test.html"
+	"pretest": "rollup -c",
+    "test": "start ./test/test.html"
   },
   "repository": {
     "type": "git",

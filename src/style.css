@@ -1,8 +1,5 @@
-tixpire-api {
-	display: flex;
-}
 
-tixpire-api button {
+button#tixpire {
 	font-weight: 100;
 	display: block;
 	width: 100%;
@@ -13,7 +10,7 @@ tixpire-api button {
 	padding: 5px;
 }
 	
-tixpire-api button div {
+button#tixpire div {
 	/* height: 27px; */
 	vertical-align: middle;
 	display: -webkit-inline-box;
@@ -38,7 +35,7 @@ tixpire-api button div {
 	text-align: left;
 }
 
-tixpire-api button div.small {
+button#tixpire div.small {
 	/* height: 27px; */
 	vertical-align: middle;
 	display: -webkit-inline-box;
@@ -66,7 +63,7 @@ tixpire-api button div.small {
 
 
 
-tixpire-api button div span {
+button#tixpire div span {
 	/*height: 27px;
     line-height: 27px;*/
     display: inline-block;
@@ -78,11 +75,11 @@ tixpire-api button div span {
 	text-align: center;
 }
 
-tixpire-api button div.small span {
+button#tixpire div.small span {
 	margin-top: 10px;
 }
 
-tixpire-api button div em {
+button#tixpire div em {
 	height: 28px;
     background: url('https://cdn.jsdelivr.net/gh/codymurphyjones/tixspire-admin-panel@master/tool/tixpire_logo.png') no-repeat center;
     background-position: center 6px;

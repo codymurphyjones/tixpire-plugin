@@ -1,2 +1,3 @@
+import Tixpire from './plugin.js';
 
-import "./component"
+export default Tixpire
