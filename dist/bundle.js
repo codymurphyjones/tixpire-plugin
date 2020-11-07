@@ -27,12 +27,12 @@ var Tixpire = (function () {
     
   }
 
-  function Tixpire (selector, getCart,requiredURL = null, styleObj = null) {
+  function Tixpire (vendorName,selector, getCart,requiredURL = null, styleObj = null) {
     // Setup a click listener on <app-drawer> itself.
       //this.addEventListener('click', );
   	const onClick = () => {
   		//window.open(tixpireUrl, '_blank',"height=500,width=500"); 
-  		post({cart: getCart()});
+  		post({cart: getCart(), vendor: vendorName});
       };
   	
   	const init = () => {
