@@ -25,7 +25,7 @@ function cartData() {
 	return JSON.stringify([{name: "Item 1", price: 500.00, quantity: 1, id: "1000"}, {name: "Item 2", price: 500.00, quantity: 2, id: "1001"}, {name: "Item 3", price: 500.00, quantity: 1, id: "1002"}]);
 }
 
-export default function (selector, getCart = cartData) {
+export default function (selector, getCart = cartData, maxWidth = null) {
   // Setup a click listener on <app-drawer> itself.
     //this.addEventListener('click', );
 	const onClick = () => {
@@ -46,6 +46,7 @@ export default function (selector, getCart = cartData) {
 		head.appendChild(link); 
 		let childButton = document.querySelector('#tixpire');
 		childButton.onclick = onClick;
+		childButton.style.maxWidth = maxWidth;
 		console.log(childButton);
 	}
 	
