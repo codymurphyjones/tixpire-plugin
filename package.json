@@ -1,13 +1,13 @@
 {
   "name": "tixpire-plugin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "tixpireUrl": "https://services.tixpire.com/checkout",
   "testUrl": "http://localhost:3000/checkout",
   "scripts": {
-	"build": "rollup -c",
-	"pretest": "rollup -c",
+    "build": "rollup -c",
+    "pretest": "rollup -c",
     "test": "start ./test/test.html"
   },
   "repository": {
@@ -22,6 +22,12 @@
   "homepage": "https://github.com/Tixpire/tixpire-plugin#readme",
   "devDependencies": {
     "@rollup/plugin-json": "^4.0.3",
-	 "rollup": "^2.6.1"
+    "husky": "^4.3.0",
+    "rollup": "^2.6.1"
+  },
+  "husky": {
+	"hooks": {
+		"pre-commit": "npm run build"
+	}
   }
 }
