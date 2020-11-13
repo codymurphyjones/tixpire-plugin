@@ -1,6 +1,6 @@
 {
   "name": "tixpire-plugin",
-  "version": "0.0.2g",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "tixpireUrl": "https://services.tixpire.com/checkout",
