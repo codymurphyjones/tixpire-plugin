@@ -29,4 +29,5 @@
 	"hooks": {
 		"pre-commit": "npm run build"
 	}
+  }
 }

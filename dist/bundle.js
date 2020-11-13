@@ -1,7 +1,7 @@
 var Tixpire = (function () {
   'use strict';
 
-  const version = "0.0.2g";
+  const version = "0.0.4";
   const tixpireUrl = "https://services.tixpire.com/checkout";
 
   const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css";
