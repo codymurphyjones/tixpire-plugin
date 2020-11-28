@@ -1,6 +1,6 @@
 {
   "name": "tixpire-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "tixpireUrl": "https://services.tixpire.com/checkout",
@@ -27,7 +27,7 @@
   },
   "husky": {
 	"hooks": {
-		"pre-commit": "npm run build"
+		"pre-commit": "npm run build && git add ./dist"
 	}
   }
 }

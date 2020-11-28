@@ -17,5 +17,31 @@
 	</div>
 	<div id="test"></div>
   <script src="../dist/bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@latest/cart/squarespace.js">
+</script>
+<script type="text/javascript">
+const style = {
+	main: {
+		maxWidth: '160px',
+		display: 'inline-block',
+		marginLeft: '20px',
+		position: 'relative',
+		top: '30px',
+		left: '280px'
+	},
+	PCSmall: {
+		marginTop: '25px',
+		position: 'relative',
+		maxWidth: '160px',
+		float: 'right',
+	},
+	mobile: {
+		width: '100%',
+		marginTop: '10px',
+		marginBottom: '-20px'
+	},
+};
+Tixpire("Tactical Fitness","#test", getSquareSpaceCart, "/F:/Projects/tixpire/tixpire-plugin/test/test.html", style);
+</script>
 </body>
 </html>
