@@ -1,6 +1,12 @@
 import {version, tixpireUrl, testUrl} from './config.js';
 const style = 'https://cdn.jsdelivr.net/gh/tixpire/tixpire-plugin@' + version + "/src/style.css"
 var currentUrl = window.location.href.split("://")[1].replace("www.","");
+var isMobile = false;
+var pcMobileResize = 768;
+if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	isMobile = true;
+}
+
 
 function post(params, method='post') {
   const form = document.createElement('form');
@@ -36,11 +42,9 @@ export default function (vendorName,selector, getCart,requiredURL = null, styleO
 	
 	const init = () => {
 		//setAttribute('class', 'tixpire_button')
-		console.log("I happen");
 		let parent = document.querySelector(selector)
 		let html = parent.innerHTML;
 		parent.innerHTML += "<button id='tixpire' aria-label='Go Now, Pay Later, Tixpire'><div><span>Go Now, Pay Later</span><em></em></div></button>"
-		console.log(parent);
 		var head = document.getElementsByTagName('HEAD')[0];  
 		var link = document.createElement('link'); 
 		link.rel = 'stylesheet';  
@@ -48,8 +52,36 @@ export default function (vendorName,selector, getCart,requiredURL = null, styleO
 		link.href = style//'../src/style.css'
 		head.appendChild(link); 
 		let childButton = document.querySelector('#tixpire');
+
 		childButton.onclick = onClick;
-		Object.assign(childButton.style,styleObj);
+		if(isMobile && styleObj.mobile) {
+			Object.assign(childButton.style,styleObj.mobile);
+		}
+		else {
+			if(styleObj.main) {
+				if(window.innerWidth <= pcMobileResize && styleObj.PCSmall) {
+					Object.assign(childButton.style,styleObj.PCSmall);
+				}
+				else {
+					Object.assign(childButton.style,styleObj.main);
+				}
+			}
+			else
+				Object.assign(childButton.style,styleObj);
+		}
+		
+		if(styleObj.PCSmall && styleObj.main) {
+			window.addEventListener('resize', function(event){
+				childButton.style = {};
+				if(window.innerWidth > pcMobileResize) {
+					Object.assign(childButton.style,styleObj.main);
+				}
+				else {
+					Object.assign(childButton.style,styleObj.PCSmall);
+				}
+				
+			});
+		}
 	}
 
 	if(requiredURL != null && requiredURL != currentUrl)
