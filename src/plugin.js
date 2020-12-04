@@ -66,11 +66,11 @@ export default function (vendorName,selector, getCart,requiredURL = null, styleO
 					Object.assign(childButton.style,styleObj.main);
 				}
 			}
-			else
+			else {
 				Object.assign(childButton.style,styleObj);
-		}
-		
-		if(styleObj.PCSmall && styleObj.main) {
+			}
+			
+			if(styleObj.PCSmall && styleObj.main) {
 			window.addEventListener('resize', function(event){
 				childButton.style = {};
 				if(window.innerWidth > pcMobileResize) {
@@ -82,6 +82,8 @@ export default function (vendorName,selector, getCart,requiredURL = null, styleO
 				
 			});
 		}
+		}
+		
 	}
 
 	if(requiredURL != null && requiredURL != currentUrl)
