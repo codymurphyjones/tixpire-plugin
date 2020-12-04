@@ -67,11 +67,11 @@ var Tixpire = (function () {
   					Object.assign(childButton.style,styleObj.main);
   				}
   			}
-  			else
+  			else {
   				Object.assign(childButton.style,styleObj);
-  		}
-  		
-  		if(styleObj.PCSmall && styleObj.main) {
+  			}
+  			
+  			if(styleObj.PCSmall && styleObj.main) {
   			window.addEventListener('resize', function(event){
   				childButton.style = {};
   				if(window.innerWidth > pcMobileResize) {
@@ -83,6 +83,8 @@ var Tixpire = (function () {
   				
   			});
   		}
+  		}
+  		
   	};
 
   	if(requiredURL != null && requiredURL != currentUrl)
