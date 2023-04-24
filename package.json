@@ -22,7 +22,7 @@
   "homepage": "https://github.com/Tixpire/tixpire-plugin#readme",
   "devDependencies": {
     "@rollup/plugin-json": "^4.0.3",
-    "husky": "^4.3.0",
+    "husky": "^8.0.3",
     "rollup": "^2.6.1"
   },
   "husky": {
